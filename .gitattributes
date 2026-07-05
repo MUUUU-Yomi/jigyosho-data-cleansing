@@ -1,0 +1,5 @@
+# 改行コードを統一（Windows/Mac/Linuxどこでも同じに見える）
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.mp4 binary
