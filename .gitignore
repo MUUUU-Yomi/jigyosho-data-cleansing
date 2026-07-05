@@ -1,0 +1,10 @@
+# GitHub表示プレビュー用の作業ファイル（リポジトリには含めない）
+github_preview.html
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+Thumbs.db
+.DS_Store

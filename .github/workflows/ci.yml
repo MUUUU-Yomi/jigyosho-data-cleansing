@@ -1,0 +1,33 @@
+name: pipeline-check
+
+# push / 手動実行のたびに、クレンジングパイプラインを自動で回して
+# 出力が壊れていないかを検証する（= 品質管理をしている証拠になる）
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリを取得
+        uses: actions/checkout@v4
+
+      - name: Python をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: クレンジングパイプラインを実行
+        run: python pipeline.py
+
+      - name: 出力を検証（件数が1件以上・JSONが壊れていないか）
+        run: |
+          python - <<'PY'
+          import json, os
+          assert os.path.exists("data/clean.json"), "clean.json が生成されていない"
+          data = json.load(open("data/clean.json", encoding="utf-8"))
+          assert isinstance(data, list) and len(data) > 0, "clean.json が空"
+          report = json.load(open("data/quality_report.json", encoding="utf-8"))
+          print(f"OK: clean={len(data)}件 / fill_rate={report.get('fill_rate')}%")
+          PY

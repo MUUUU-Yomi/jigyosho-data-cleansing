@@ -1,0 +1,11 @@
+{
+  "raw_count": 199,
+  "clean_count": 186,
+  "deduped_count": 10,
+  "tel_fixed": 174,
+  "addr_normalized": 173,
+  "fill_rate": 98.5,
+  "source": "厚労省 介護サービス情報公表 / 自治体オープンデータ(BODIK・介護サービス事業所一覧) | https://data.bodik.jp/dataset/fc4bdf7f-0c1b-4eb0-9224-7e4f96220ad3/resource/f0becb0e-a72c-49b5-81e5-afe1159d4b05/download/472093careservicenewedit.csv",
+  "is_real_data": true,
+  "note": "BODIK(自治体オープンデータ共通基盤)から介護サービス事業所一覧CSVを取得・クレンジング。 取得199行 → 正規化196件 → 名寄せで10件統合 → clean 186件。電話は174件を市外局番判定で canonical 形に整形 / 住所は173件を丁目番地→ハイフン整形。定員(capacity)は当該データに列が無く全件null(捏造せず空のまま)。"
+}
